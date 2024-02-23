@@ -2,10 +2,14 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 import TestComponent from './components/component';
+import useInterval from './components/hook';
 
 
 function App() {
   const [count, setCount] = useState(0)
+  useInterval(() => {
+    setCount(count + 1);
+  }, 1000);
 
   return (
     <div className="App">

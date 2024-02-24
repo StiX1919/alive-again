@@ -15,9 +15,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Kick butts
-        </p>
+        <h2>Idle game practice/ideas</h2>
         <p>{count}</p>
         <TestComponent num={count}/>
         <button onClick={() => setCount(count)}>Click This to count</button>

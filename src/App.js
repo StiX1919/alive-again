@@ -7,18 +7,30 @@ import useInterval from './components/hook';
 
 function App() {
   const [count, setCount] = useState(0)
+  const [bounce, setBounce] = useState(0)
   useInterval(() => {
-    setCount(count + 1);
+    setCount(count + bounce);
   }, 1000);
+
+
+  const updateBounce = (currCount) => {
+    if (currCount >= 10) {
+      setCount(currCount - 10)
+      setBounce(bounce + 1)
+    }
+  }
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h2>Idle game practice/ideas</h2>
-        <p>{count}</p>
+        <p>Count: {count}</p>
+        <p>Bounce: {bounce}</p>
         <TestComponent num={count}/>
-        <button onClick={() => setCount(count)}>Click This to count</button>
+        <button onClick={() => setCount(count + 1)}>Click This to count</button>
+        <button onClick={() => updateBounce(count)}>Click This to bounce</button>
+
       </header>
     </div>
   );

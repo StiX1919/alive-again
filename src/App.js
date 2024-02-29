@@ -1,36 +1,53 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
-import TestComponent from './components/component';
+// import TestComponent from './components/component'
 import useInterval from './components/hook';
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  //one state? Maybe component 
+  
+  const [levelOne, setOne] = useState({
+    count: 0,
+    counter: 0
+  })
+  const [levelTwo, setTwo] = useState({
+    count: 0,
+    counter: 0
+  })
+  const [levelThree, setThree] = useState({
+    count: 0,
+    counter: 0
+  })
   const [bounce, setBounce] = useState(0)
-  useInterval(() => {
+
+  const addToCount = (level) => {
+    const newState = {...level}
+    newState.count++
+    return newState
+  }
+  useInterval((level) => {
+    // make reusable for multiple levels of incrementation
     setCount(count + bounce);
   }, 1000);
 
-
-  const updateBounce = (currCount, level) => {
-    // make reusable for multiple levels of incrementation
-    if (currCount >= 10) {
-      setCount(currCount - 10)
-      setBounce(bounce + 1)
-    }
+  const createInterval = () => {
+    
   }
+
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h2>Idle game practice/ideas</h2>
-        <p>Count: {count}</p>
-        <p>Bounce: {bounce}</p>
-        <TestComponent num={count}/>
-        <button onClick={() => setCount(count + 1)}>Click This to count</button>
-        <button onClick={() => updateBounce(count)}>Click This to bounce</button>
+        <p>Level One: {levelOne.count}</p>
+        <button onClick={() => setOne(addToCount(levelOne))}>Add to Level 1</button>
+        <button onClick={() => createInterval()} />
+        <p>Level Two: {levelTwo.count}</p>
+        <button onClick={() => setTwo(addToCount(levelTwo))}>Add to Level 2</button>
+        <button onClick={() => createInterval()} />
         
       </header>
     </div>

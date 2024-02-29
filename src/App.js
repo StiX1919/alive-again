@@ -13,7 +13,8 @@ function App() {
   }, 1000);
 
 
-  const updateBounce = (currCount) => {
+  const updateBounce = (currCount, level) => {
+    // make reusable for multiple levels of incrementation
     if (currCount >= 10) {
       setCount(currCount - 10)
       setBounce(bounce + 1)
@@ -30,7 +31,7 @@ function App() {
         <TestComponent num={count}/>
         <button onClick={() => setCount(count + 1)}>Click This to count</button>
         <button onClick={() => updateBounce(count)}>Click This to bounce</button>
-
+        
       </header>
     </div>
   );

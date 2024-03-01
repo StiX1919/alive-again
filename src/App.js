@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
-// import TestComponent from './components/component'
+import Incrementer from './components/component'
 import useInterval from './components/hook';
 
 
@@ -33,14 +33,16 @@ function App() {
   }, 1000);
 
   const createInterval = () => {
-    
+
   }
 
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <Incrementer title={'One'}/>
+        <Incrementer title={'Two'}/>
+        <Incrementer title={'Three'}/>
         <h2>Idle game practice/ideas</h2>
         <p>Level One: {levelOne.count}</p>
         <button onClick={() => setOne(addToCount(levelOne))}>Add to Level 1</button>

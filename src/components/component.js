@@ -3,20 +3,27 @@ import useInterval from "./hook";
 
 //WIP
 const Incrementer = ({title}) => {
-    const [levelOne, setOne] = useState({
+    const [data, setData] = useState({
         count: 0,
         counter: 0
       })
-    useInterval((level) => {
-        // make reusable for multiple levels of incrementation
-        // setCount(count + bounce);
+    const createInterval = () => {
+        if(data.count > 50) {
+            setData({
+                count: data.count - 50,
+                counter: data.counter + 1
+            })
+        }
+    }
+    useInterval(() => {
+        data.counter > 0 && setData({ ...data, count: (data.count + data.counter) });
     }, 1000);
 
     return (
       <div>
-        <p>Level One: {levelOne.count}</p>
-        <button onClick={() => setOne(addToCount(levelOne))}>Add to Level 1</button>
-        <button onClick={() => createInterval()} />
+        <p>Level {title}: {data.count} Counters: {data.counter}</p>
+        <button onClick={() => setData({...data, count: data.count + 1})}>Add to Level 1</button>
+        <button onClick={() => createInterval()}>Add Counter</button>
       </div>
     );
   }

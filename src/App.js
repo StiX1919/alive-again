@@ -27,10 +27,10 @@ function App() {
     newState.count++
     return newState
   }
-  useInterval((level) => {
-    // make reusable for multiple levels of incrementation
-    setCount(count + bounce);
-  }, 1000);
+  // useInterval((level) => {
+  //   // make reusable for multiple levels of incrementation
+  //   setCount(count + bounce);
+  // }, 1000);
 
   const createInterval = () => {
 

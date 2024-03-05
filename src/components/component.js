@@ -6,7 +6,7 @@ const Incrementer = ({title}) => {
     const [data, setData] = useState({
         count: 0,
         counter: 0
-      })
+    })
     const createInterval = () => {
         if(data.count > 50) {
             setData({

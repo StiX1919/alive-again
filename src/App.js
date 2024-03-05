@@ -1,12 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Incrementer from './components/component'
 import useInterval from './components/hook';
+import { RootContext } from './context/RootContext';
 
 
 function App() {
-  //one state? Maybe component 
+  const context = useContext(RootContext)
   
   const [levelOne, setOne] = useState({
     count: 0,
@@ -16,24 +17,11 @@ function App() {
     count: 0,
     counter: 0
   })
-  const [levelThree, setThree] = useState({
-    count: 0,
-    counter: 0
-  })
-  const [bounce, setBounce] = useState(0)
 
   const addToCount = (level) => {
     const newState = {...level}
     newState.count++
     return newState
-  }
-  // useInterval((level) => {
-  //   // make reusable for multiple levels of incrementation
-  //   setCount(count + bounce);
-  // }, 1000);
-
-  const createInterval = () => {
-
   }
 
 
@@ -43,14 +31,6 @@ function App() {
         <Incrementer title={'One'}/>
         <Incrementer title={'Two'}/>
         <Incrementer title={'Three'}/>
-        <h2>Idle game practice/ideas</h2>
-        <p>Level One: {levelOne.count}</p>
-        <button onClick={() => setOne(addToCount(levelOne))}>Add to Level 1</button>
-        <button onClick={() => createInterval()} />
-        <p>Level Two: {levelTwo.count}</p>
-        <button onClick={() => setTwo(addToCount(levelTwo))}>Add to Level 2</button>
-        <button onClick={() => createInterval()} />
-        
       </header>
     </div>
   );

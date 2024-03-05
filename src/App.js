@@ -1,36 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
-import { useContext, useState } from 'react';
+import { useContext, useReducer, useState } from 'react';
 import Incrementer from './components/component'
 import useInterval from './components/hook';
 import { RootContext } from './context/RootContext';
 
 
 function App() {
+  const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
   const context = useContext(RootContext)
-  
-  const [levelOne, setOne] = useState({
-    count: 0,
-    counter: 0
-  })
-  const [levelTwo, setTwo] = useState({
-    count: 0,
-    counter: 0
-  })
-
-  const addToCount = (level) => {
-    const newState = {...level}
-    newState.count++
-    return newState
-  }
 
 
   return (
     <div className="App">
       <header className="App-header">
-        <Incrementer title={'One'}/>
-        <Incrementer title={'Two'}/>
-        <Incrementer title={'Three'}/>
+        {context.levels.map((level) => (
+          <Incrementer title={'One'} count={level}/>
+        ))}
       </header>
     </div>
   );

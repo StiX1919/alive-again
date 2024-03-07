@@ -1,15 +1,11 @@
 import './App.css';
 import { useReducer } from 'react';
 import Incrementer from './components/component'
+import { IdleContext, IdleDispatchContext } from './context/RootContext';
 
 export default function App() {
   const [levels, dispatch] = useReducer(tasksReducer, idleLevels);
-  function handleAddToCount(levelId) {
-    dispatch({
-      type: 'addCount',
-      id: levelId
-    });
-  }
+
 
   // function handleDeleteTask(taskId) {
   //   dispatch({
@@ -19,13 +15,17 @@ export default function App() {
   // }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        {levels.map(({ count, counter, name}, i) => (
-          <Incrementer key={i} id={i} count={count} counter={counter} name={name} addToCount={handleAddToCount}/>
-        ))}
-      </header>
-    </div>
+    <IdleContext.Provider value={levels}>
+      <IdleDispatchContext.Provider value={dispatch}>
+        <div className="App">
+          <header className="App-header">
+            {levels.map((level, i) => (
+              <Incrementer level={level} index={i}/>
+            ))}
+          </header>
+        </div>
+      </IdleDispatchContext.Provider>
+    </IdleContext.Provider>
   );
 }
 
@@ -42,20 +42,6 @@ function tasksReducer(levels, action) {
         return array
       }, []);
     }
-    // case 'changed': {
-    //   return tasks.map(t => {
-    //     if (t.id === action.task.id) {
-    //       return action.task;
-    //     } else {
-    //       return t;
-    //     }
-    //   });
-    // }
-    // case 'deleted': {
-    //   return tasks.filter(t => t.id !== action.id);
-    // }
-
-
     default: {
       throw Error('Unknown action: ' + action.type);
     }

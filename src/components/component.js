@@ -2,7 +2,7 @@ import { useState } from "react";
 import useInterval from "./hook";
 
 //WIP
-const Incrementer = ({ count, counter, name }) => {
+const Incrementer = ({ id, count, counter, name, addToCount}) => {
     const [data, setData] = useState({
         count: 0,
         counter: 0
@@ -22,7 +22,7 @@ const Incrementer = ({ count, counter, name }) => {
     return (
       <div>
         <p>{name}: {count} Counters: {counter}</p>
-        <button onClick={() => setData({...data, count: data.count + 1})}>Add to Level 1</button>
+        <button onClick={() => addToCount(id)}>Add to Level 1</button>
         <button onClick={() => createInterval()}>Add Counter</button>
       </div>
     );

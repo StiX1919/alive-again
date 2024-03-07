@@ -4,39 +4,57 @@ import Incrementer from './components/component'
 
 export default function App() {
   const [levels, dispatch] = useReducer(tasksReducer, idleLevels);
+  function handleAddToCount(levelId) {
+    dispatch({
+      type: 'addCount',
+      id: levelId
+    });
+  }
+
+  // function handleDeleteTask(taskId) {
+  //   dispatch({
+  //     type: 'deleted',
+  //     id: taskId
+  //   });
+  // }
 
   return (
     <div className="App">
       <header className="App-header">
-        {levels.map(({ count, counter, name}) => (
-          <Incrementer count={count} counter={counter} name={name}/>
+        {levels.map(({ count, counter, name}, i) => (
+          <Incrementer id={i} count={count} counter={counter} name={name} addToCount={handleAddToCount}/>
         ))}
       </header>
     </div>
   );
 }
 
-function tasksReducer(tasks, action) {
+function tasksReducer(levels, action) {
   switch (action.type) {
-    case 'added': {
-      return [...tasks, {
-        id: action.id,
-        text: action.text,
-        done: false
-      }];
-    }
-    case 'changed': {
-      return tasks.map(t => {
-        if (t.id === action.task.id) {
-          return action.task;
-        } else {
-          return t;
+    case 'addCount': {
+      return levels.reduce((array, level, i) => {
+        if(action.id === i) {
+          level.count++
         }
-      });
+        console.log('hit', level, array)
+        array.push(level)
+        return array
+      }, []);
     }
-    case 'deleted': {
-      return tasks.filter(t => t.id !== action.id);
-    }
+    // case 'changed': {
+    //   return tasks.map(t => {
+    //     if (t.id === action.task.id) {
+    //       return action.task;
+    //     } else {
+    //       return t;
+    //     }
+    //   });
+    // }
+    // case 'deleted': {
+    //   return tasks.filter(t => t.id !== action.id);
+    // }
+
+
     default: {
       throw Error('Unknown action: ' + action.type);
     }

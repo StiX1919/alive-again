@@ -22,7 +22,7 @@ export default function App() {
     <div className="App">
       <header className="App-header">
         {levels.map(({ count, counter, name}, i) => (
-          <Incrementer id={i} count={count} counter={counter} name={name} addToCount={handleAddToCount}/>
+          <Incrementer key={i} id={i} count={count} counter={counter} name={name} addToCount={handleAddToCount}/>
         ))}
       </header>
     </div>
@@ -33,10 +33,11 @@ function tasksReducer(levels, action) {
   switch (action.type) {
     case 'addCount': {
       return levels.reduce((array, level, i) => {
+        console.log('1', level.count)
         if(action.id === i) {
-          level.count++
+          level.count = 1
         }
-        console.log('hit', level, array)
+        console.log('2', level.count)
         array.push(level)
         return array
       }, []);

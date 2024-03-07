@@ -7,23 +7,23 @@ const Incrementer = ({ id, count, counter, name, addToCount}) => {
         count: 0,
         counter: 0
     })
-    const createInterval = () => {
-        if(data.count > 50) {
-            setData({
-                count: data.count - 50,
-                counter: data.counter + 1
-            })
-        }
-    }
-    useInterval(() => {
-        data.counter > 0 && setData({ ...data, count: (data.count + data.counter) });
-    }, 1000);
+    // const createInterval = () => {
+    //     if(data.count > 50) {
+    //         setData({
+    //             count: data.count - 50,
+    //             counter: data.counter + 1
+    //         })
+    //     }
+    // }
+    // useInterval(() => {
+    //     data.counter > 0 && setData({ ...data, count: (data.count + data.counter) });
+    // }, 1000);
 
     return (
       <div>
         <p>{name}: {count} Counters: {counter}</p>
         <button onClick={() => addToCount(id)}>Add to Level 1</button>
-        <button onClick={() => createInterval()}>Add Counter</button>
+        {/* <button onClick={() => createInterval()}>Add Counter</button> */}
       </div>
     );
   }
